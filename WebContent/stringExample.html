@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+var a='HARSHADA';
+console.log(typeof a);
+
+a.toLocaleLowerCase(); //String Obj wrapper Object
+console.log(a);
+console.log(a.indexOf('R'));
+console.log(a.charAt(4));
+
+var b=new String('HARSHADA');
+console.log(typeof b);
+b.toLocaleLowerCase();
+console.log(b.toString());
+console.log(b.valueOf());
+
+var sentence="my name is Harshada.leaning java";
+var sen=sentence.split(" ",2);
+
+console.log(sen);
+for (var i = 0; i < sen.length; i++) {
+	
+	console.log(sen[i]);
+}
+var email='hgharshada@gmail.com';
+console.log(email.slice(1, 3));
+
+console.log('apple'.localeCompare('apple'));
+</script>
+</head>
+<body>
+
+</body>
+</html>

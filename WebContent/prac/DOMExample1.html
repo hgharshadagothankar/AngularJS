@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+</head>
+<body>
+		
+		<h1>HArshada</h1>
+		
+</body>
+<script type="text/javascript">
+
+
+console.log(window);
+console.log(document);
+console.log(document.nodeName);
+console.log(document.nodeType);
+console.log(document.nodeValue);
+console.log(document.body);
+console.log(document.body.nodeType);
+
+var childNodes=document.body.childNodes;
+for (var i = 0; i < childNodes.length; i++) {
+	console.log("Child Type:"+childNodes[i].nodeType);
+	console.log("Child Name:"+childNodes[i].nodeName);
+	console.log("Child innerHtml:"+childNodes[i].innerHTML);
+	console.log("Child Value:"+childNodes[i].nodeValue);
+}
+
+
+</script>
+</html>

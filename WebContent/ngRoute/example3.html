@@ -1,0 +1,52 @@
+<html ng-app="routeApp">
+<head lang="en">
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
+
+	<h1>header</h1>
+	<div ng-view></div>
+
+	<a href="#red">Red</a>
+	<a href="#green">Green</a>
+	<a href="#blue">Blue</a>
+	<a href="#brokeen">Broken</a> {{content}}
+	<h1>footer</h1>
+</body>
+
+<script src="angular.js"></script>
+<script src="angular-route.js"></script>
+
+
+<script>
+(function(){
+    var module=angular.module("routeApp",['ngRoute']);
+    module.config(function($routeProvider){
+ $routeProvider.when("/", {
+     templateUrl : "main.html",
+     controller:"PageController1"
+ })
+ .when("/red", {
+     templateUrl : "red.html",
+     controller:"PageController1"
+ })
+ .when("/green", {
+	/*  
+	 It'll go to controller and forward data to html page */
+     templateUrl : "green.html",
+     controller:"PageController2"
+ })
+ .when("/blue/:name", {
+     templateUrl : "blue.html",
+     controller:"PageController3"
+     /*Not working*/
+     
+ }).when("/default", {
+     templateUrl : "main.html"
+ }).otherwise({redirectTo:"default"});
+    })
+})();
+</script>
+<script src="controller.js"></script>
+</html>

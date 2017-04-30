@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+Employee.prototype.attendance=function(){
+	var z=0;
+	console.log("attendence Marking :"+this.name);
+	return this.name;
+
+}
+
+function Employee(empId,name,age){
+	this.name=name;
+	this.age=age;
+	this.empId=empId
+};
+
+var ramesh=new Employee('E001','ramesh',34);
+var suresh=new Employee('suresh',56,'E002');
+
+console.log(ramesh.name);
+console.log(ramesh.__proto__);
+console.log(Employee.prototype.attendance);
+console.log(ramesh.attendance());
+
+console.log(Employee.prototype.attendance);
+console.log(ramesh.__proto__ == Employee.prototype);
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

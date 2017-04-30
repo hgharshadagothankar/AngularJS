@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body onload="return loadValidate()">
+	<form onsubmit="return submitValidate()">
+
+		<fieldset>
+			<legend>Login</legend>
+			<label>UserName:</label><input type="text" name="uName" id="uName">
+			<br> <label>Password:</label><input type="password"
+				name="password" id="password"><br> <label>Submit:</label><input
+				type="submit" value="submit"><br> <label>Reset:</label><input
+				type="reset" value="reset"><br>
+
+
+
+		</fieldset>
+
+	</form>
+
+	<div id='table'></div>
+	<div id='validMessage'></div>
+
+</body>
+
+
+
+<script type="text/javascript">
+	function loadValidate() {
+
+		var tableTag = document.querySelector('#table');
+		var tableBody = " ";
+		var userObj = [];
+
+		for (var i = 0; i < localStorage.length; i++) {
+			var key = localStorage.key(i);
+			var JSONObj = localStorage.getItem(key);
+			console.log(JSONObj);
+			var JSObj = JSON.parse(JSONObj);
+			userObj.push(JSObj);
+		}
+		console.log("************************************************************************");
+		console.log(JSONObj);
+		console.log(userObj);
+		var rows = userObj.map(function(user, i) {
+			return "<tr><td>" + user.uName + "</td><td>" + user.password
+					+ "</td><td>" + user.genderName + "</td><td>"
+					+ user.jobstatus + "</td><td>" + user.dob + "</td></tr>";
+		});
+		console.log(rows);
+		tableTag.innerHTML = "<h1>LOCAL STORAGE DATA:</h1><table border=1><tr><th>User Name</th><th>Password</th><th>Gender</th><th>Job Status</th><th>DOB</th></tr>"
+				+ rows + "</table>";
+
+	}
+	function submitValidate() {
+		var uName = document.getElementById("uName").value;
+		var password = document.getElementById("password").value;
+		console.log("local storage" + localStorage.getItem(uName));
+		var tableTag = document.querySelector('#validMessage');
+		var tableBody = " ";
+		var userObj = [];
+
+		for (var i = 0; i < localStorage.length; i++) {
+			var key = localStorage.key(i);
+			var JSONObj = localStorage.getItem(key);
+			var JSObj = JSON.parse(JSONObj);
+			userObj.push(JSObj);
+		}
+		console.log("************************************************************************");
+		var rows = userObj.map(function(user, i) {
+			if (password == user.password)
+				return "<tr><td>" + user.uName + "</td><td>" + user.password
+						+ "</td><td>" + user.genderName + "</td><td>"
+						+ user.jobstatus + "</td><td>" + user.dob
+						+ "</td></tr>";
+
+		});
+		console.log(rows);
+		tableTag.innerHTML = "<h1>User Details:</h1><table border=1><tr><th>User Name</th><th>Password</th><th>Gender</th><th>Job Status</th><th>DOB</th></tr>"
+				+ rows + "</table>";
+		return false;
+	}
+</script>
+</html>

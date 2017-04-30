@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="testCtrlModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+
+<script type="text/javascript">
+
+var module = angular.module("testCtrlModule", []);
+module.controller("testCtrl",function($scope,$timeout){
+	//$scope.names=["ramesh","suresh","dinesh"];
+	$scope.employees=[{
+		employeeId:1001,
+		name:"Ramesh",
+		salary:100001
+	},
+	{
+		employeeId:1002,
+		name:"suresh",
+		salary:200001	
+	},{
+		employeeId:1003,
+		name:"dinesh",
+		salary:300001
+	}];
+});
+
+
+</script>
+</head>
+<body ng-controller="testCtrl">
+<table border="1">
+
+<tr>
+<th>Emp ID</th>
+<th>Name</th>
+<th>salary</th></tr>
+<tr ng-repeat="e in employees">
+<td>{{e.employeeId}}</td>
+<td>{{e.name}}</td>
+<td>{{e.salary}}</td>
+</tr>
+</table>
+</body>
+</html>

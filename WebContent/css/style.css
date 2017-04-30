@@ -1,0 +1,91 @@
+header{
+	color: blue;
+	border: thin black solid;
+	padding: 12px;
+	background-color: pink ;
+	text-align: center;
+}
+
+header h1{
+	color: red;
+	border: thin black solid;
+	padding: 12px;
+	background-color: #18e723 ;
+	text-align: center;
+}
+
+nav{
+	/* border-left: 12px solid #5fba7d;
+   position: absolute; */
+   float:right;
+   background-color: #f8e723;
+}
+/*
+ ul {
+    font-family: Verdana;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+nav li {
+    float: left;
+    position: relative;
+    background: #738c4a url(jvmhost2.png) repeat-x;
+    color: #ffffff;
+    list-style: none;
+    font-family: verdana;
+    font-size: 11px;
+    height: 29px;
+    margin: 0px;
+    padding: 0px;
+} */
+
+
+
+#p1{
+	color: red;
+	border: thin black solid;
+	padding-right: 12px;
+	background-color: #f38bf1 ;
+	text-align: center;
+}
+
+figcaption{
+	font-style: italic;
+	font-stretch: expanded;
+}
+figure{
+	float:right;
+	
+}
+main{
+	background-color: #83fcfc;
+
+	
+}
+footer{
+	background-color: #86fc83;
+	
+}
+
+form li{
+	
+	border-bottom: 3px solid #eee;
+	position: relative;
+	
+}
+
+form input{
+	
+	box-shadow:0px 0px 3px #ff0000,
+				0px 10px 15px #0080ff inset;
+	
+}
+
+body{
+	font-size:41px/14px;
+}
+input:required{
+	background: url(Red.png) no-repeat 100% center;
+}

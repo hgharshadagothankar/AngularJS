@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="testCtrlModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+
+<script type="text/javascript">
+	console.log(angular);
+
+	var module = angular.module("testCtrlModule", []);
+	module.controller("testCtrl1", function($scope,$rootScope) {
+	$scope.names=["ramhes","suresh","dinesh"];
+	});
+	module.controller("testCtrl2", function($scope) {
+		//$scope.names=["ramhes","suresh","dinesh"];
+		});
+</script>
+</head>
+<body>
+
+	<div ng-controller="testCtrl1">
+		<select ng-options="name for name in names" ng-model="name"></select>
+		{{name}}
+		
+		<div ng-controller="testCtrl2">
+		<!-- <select ng-options="name for name in names" ng-model="name"></select> -->
+		
+		{{name|| 'Not available'}}
+	</div>
+	</div>
+	
+	
+</body>
+</html>

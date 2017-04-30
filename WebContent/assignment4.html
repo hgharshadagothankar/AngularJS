@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+Car.prototype.start=function(){
+	console.log("start");
+	return 'start';
+}
+Car.prototype.stop=function(){
+	console.log("stop");
+	return 'stop';
+}
+Car.prototype.drive=function(){
+	console.log("drive");
+	return 'drive';
+}
+
+function Car(carName,carNo,price){
+	this.carName=carName;
+	this.carNo=carNo;
+	this.price=price;
+};
+
+function EcomonicCar(carName,carNo,price,milage){
+	Car.call(this, carName,carNo,price);
+	this.milage=milage;
+	loadReductionFetch=function(){
+		console.log("drive");
+		return this.milage;
+	}
+};
+EcomonicCar.prototype=Object.create(Car.prototype);
+
+var audiCar=new EcomonicCar('audi', 'NJ001', 900000, 20);
+var sedanCar=new EcomonicCar('sedan', 'NJ002', 600000, 30);
+var santroCar=new EcomonicCar('santro', 'NJ003', 20000, 10);
+
+
+var carFactory=[audiCar,sedanCar,santroCar];
+
+
+carFactory.forEach(function(s,i){
+	console.log("Car Name: "+s.carName+" Car No: "+s.carNo+" Car price: "+s.price+" Milage : "+s.milage);
+});
+
+console.log("***************Filter**************************************************");
+var FilterCars=carFactory.filter(function(s,i){
+	if(s.milage>20)
+		return true;
+	else
+		return false;
+});
+
+FilterCars.forEach(function(s,i){
+	console.log("Car Name: "+s.carName+" Car No: "+s.carNo+" Car price: "+s.price+" Milage : "+s.milage);
+});
+console.log("***************Maps**************************************************************");
+var MapCars=carFactory.map(function(s,i){
+	if(s.price<400000)
+		s.status='economic';
+	else
+		s.status='luxuary';
+	return s;
+});
+
+MapCars.forEach(function(s,i){
+	console.log("Car Name: "+s.carName+" Car No: "+s.carNo+" Car price: "+s.price+" Milage : "+s.milage+" status: "+s.status);
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>

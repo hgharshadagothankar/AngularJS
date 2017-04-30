@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+console.log("before a creation");
+//var a=3..1;
+//a=9;
+//console.log(a);
+//var arr=new Array(-1);
+/* var Customer=null;
+Customer.foo;  */
+//undefined.foo;
+console.log("after a creation");
+
+/*Exception Handling*/
+try {
+    /*  var Customer=null;
+	Customer.foo;   */
+	//throw TypeError;
+	//throw exception;
+	//throw new Error('some message');
+	//undefined.foo;
+	//var arr=new Array(-1);
+	//var a=3..1;
+	console.log(a);
+} catch (e) {
+	
+	if(e instanceof TypeError){
+		console.log("inside catch:"+e);	
+	}else if(e instanceof ReferenceError){
+		console.log("inside catch:"+e);	
+	}else if(e instanceof SyntaxError){
+		console.log("inside catch:"+e);	
+	}else if(e instanceof RangeError){
+		console.log("inside catch:"+e);	
+	}
+}finally{
+	console.log("inside finally:");
+}
+
+/*********************************User Defined Exception */
+ try {
+	 throw{
+			name:"User Define Exception",
+		    message:"Error detected.Please contact Sustem admin",
+		    toString:function(){
+		    	return this.name+":"+this.message;
+		    }
+		};
+	
+} catch (e) {
+	// TODO: handle exception
+	console.log("catch----------------"+e);
+}
+ 
+ 
+console.log("after exception handling");
+</script>
+</head>
+<body>
+
+</body>
+</html>

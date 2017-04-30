@@ -1,0 +1,17 @@
+<div class="col-xs-3">
+    <a ng-click="selectDepartmentHandler()"
+       class="btn btn-block btn-default btn-lg">Home</a>
+    <a ng-repeat="e in employees  | orderBy:'department' | unique:'department'"
+       ng-click="selectDepartmentHandler (e.department)"
+       class=" btn btn-block btn-default btn-lg"
+       ng-class="getDepartmentClass(e.department)">
+        {{e.department}}
+    </a>
+</div>
+
+<div class="col-xs-8">
+<h1>Employee Details</h1>
+<h3> Name: {{employee.name}}</h3>
+<h3> age: {{employee.age}}</h3>
+<h3> salary: {{employee.salary}}</h3>
+</div>

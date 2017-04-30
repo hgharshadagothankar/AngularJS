@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html ng-app="mainContainer">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script src="assignmentFactory.js"></script>
+<script src="assignmentService.js"></script>
+<link  rel="stylesheet" href="../bootstrap-3.3.7-dist/css/bootstrap.min.css"></link>
+<script type="text/javascript">
+	function User(uName, password, cpassword, genderName, jobstatus, dob) {
+		this.uName = uName;
+		this.password = password;
+		this.cpassword = cpassword;
+		this.genderName = genderName;
+		this.jobstatus = jobstatus;
+		this.dob = dob;
+	}
+	
+	var module = angular.module("mainContainer", [ 'employeeFactoryModule',
+			'employeeServiceModule' ]);
+
+	/*
+	JS CODE
+
+  FACTORY
+	var module = angular.module("employeeFactoryModule", []);
+
+
+
+
+	module.factory("employeeFactory", function() {
+	    var empObj={
+	   	 getEmpDetails:function(){
+	   		 var userObjArray = [];
+	   			for (var i = 0; i < localStorage.length; i++) {
+
+	   				var key = localStorage.key(i);
+	   				var JSONObj = localStorage.getItem(key);
+	   				console.log(JSONObj);
+	   				var JSObj = JSON.parse(JSONObj);
+	   				userObjArray.push(JSObj);
+	   			}
+	   			return userObjArray;
+
+	   	 }
+	    }
+	    return empObj;
+	});
+	SERVICE
+	var module = angular.module("employeeServiceModule", []);
+
+	module.service("employeeService", function() {
+		this.insertEmployee = function(userObj) {
+			var JSONUserObj = JSON.stringify(userObj);
+			localStorage.setItem(userObj.uName, JSONUserObj);
+		};
+	});
+
+
+	
+	
+	
+	*/
+	
+	
+	
+	
+	module.controller("registrationController", function($scope,
+			employeeService, $rootScope) {
+
+		$scope.regValidate = function() {
+			var uName = $scope.uName;
+			var password = $scope.password;
+			var cpassword = $scope.cpassword;
+			var genderName = $scope.gender;
+			var jobstatus = $scope.status;
+			var dob = $scope.dob;
+			var userObj = new User(uName, password, cpassword, genderName,
+					jobstatus, dob);
+			employeeService.insertEmployee(userObj);
+			$rootScope.$broadcast("passingEvent", userObj);
+		};
+
+	});
+	module.controller("displayContent", function($scope, employeeFactory) {
+
+		
+		$scope.$on("passingEvent", function(event, args) {
+			$scope.employees = employeeFactory.getEmpDetails();
+
+		});
+		$scope.employees = employeeFactory.getEmpDetails();
+
+	});
+</script>
+</head>
+<body>
+<header>
+COURSE MANAGEMENT SYSTEM
+</header>
+	<div ng-controller="registrationController" >
+		<fieldset>
+			<legend>Registration</legend>
+			<label>UserName:</label><input type="text" ng-model="uName"
+				id="uName"> <br> <label>Password:</label><input
+				type="password" ng-model="password" id="password"><br>
+			<label>Confirm Password:</label><input type="password"
+				ng-model="cpassword" id="cpassword"><br> <label>Job
+				Status:</label><select ng-model="status" id="status">
+				<option>jr</option>
+				<option>mid</option>
+				<option>sr</option>
+			</select><br> <label>Gender:</label><input type="radio" ng-model="gender"
+				id="gender" value="female">Female <input type="radio"
+				ng-model="gender" id="gender" value="male">Male<br> <label>DOB:</label><input
+				type="date" ng-model="dob" id="dob"><br> <label>Submit:
+			</label><input type="button" value="submit" ng-click="regValidate()">
+			<br> <label>Reset:</label><input type="reset" value="reset"><br>
+		</fieldset>
+	</div>
+	<div ng-controller="displayContent">
+		<h1>User Details:</h1>
+		<table border=1 class="table table-striped">
+			<tr class="Success">
+				<th>User Name</th>
+				<th>Password</th>
+				<th>Confirm Password</th>
+				<th>Gender</th>
+				<th>Job Status</th>
+				<th>DOB</th>
+			</tr>
+			<tr ng-repeat="e in employees">
+				<td>{{e.uName}}</td>
+				<td>{{e.password}}</td>
+				<td>{{e.cpassword}}</td>
+				<td>{{e.genderName}}</td>
+				<td>{{e.jobstatus}}</td>
+				<td>{{e.dob}}</td>
+			</tr>
+		</table>
+
+
+
+	</div>
+
+<footer>
+
+</footer>
+</body>
+</html>

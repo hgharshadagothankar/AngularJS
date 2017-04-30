@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="mainContainer">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+
+function User(uName, password, cpassword, genderName, jobstatus, dob) {
+	this.uName = uName;
+	this.password = password;
+	this.cpassword = cpassword;
+	this.genderName = genderName;
+	this.jobstatus = jobstatus;
+	this.dob = dob;
+}
+var module = angular.module("mainContainer", []);
+module.controller("registrationController", function($scope, $rootScope) {
+	$scope.regValidate = function() {
+		var uName = $scope.uName;
+		var password = $scope.password;
+		var cpassword = $scope.cpassword;
+		var genderName = $scope.gender;
+		var jobstatus = $scope.status;
+		var dob = $scope.dob;
+		var userObj = new User(uName, password, cpassword, genderName,
+				jobstatus, dob);
+		var JSONUserObj = JSON.stringify(userObj);
+		localStorage.setItem(uName, JSONUserObj);
+		console.log(uName);
+	};
+	
+	
+
+});
+
+
+
+</script>
+</head>
+<body>
+	<div ng-controller="registrationController">
+		<fieldset>
+			<legend>Registration</legend>
+			<label>UserName:</label><input type="text" ng-model="uName"id="uName"> <br>
+			 <label>Password:</label><input type="password" ng-model="password" id="password"><br>
+			<label>Confirm Password:</label><input type="password" ng-model="cpassword" id="cpassword"><br>
+			 <label>Job Status:</label><select ng-model="status" id="status">
+				<option>jr</option>
+				<option>mid</option>
+				<option>sr</option>
+			</select><br>
+			 <label>Gender:</label><input type="radio" ng-model="gender" id="gender" value="female">Female
+			  <input type="radio" ng-model="gender" id="gender" value="male">Male<br>
+			   <label>DOB:</label><input type="date" ng-model="dob" id="dob"><br> <label>Submit:
+			</label><input type="button" value="submit" ng-click="regValidate()">
+			<br> <label>Reset:</label><input type="reset" value="reset"><br>
+		</fieldset>
+	</div>
+</body>
+</html>

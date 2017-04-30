@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+Student.prototype.attendance=function(){
+	console.log("hi in attendance");
+	return this.id;
+};
+
+function Student(id,name,age){
+	this.id=id;
+	this.name=name;
+	this.age=age;
+	this.home=function(){
+		console.log("hi in hone");
+	};
+};
+
+
+var student1=new Student('s001','harsgada',28);
+var student2=new Student('s002','keerthana',25);
+var student3=new Student('s003','rasika',25);
+
+var school=[student1,student2,student3];
+student1.attendance();
+console.log("scholl"+school);
+for (var i = 0; i < school.length; i++) {
+	console.log("school ID:"+school[i].id+"  Name:"+school[i].name+" Age :"+school[i].age+" school attendance"+school[i].attendance());
+}
+console.log("**************************For Each******************************");
+
+school.forEach(function(s,index){
+	console.log("Student Name"+s.name+" Student Id :"+s.id);
+	console.log("index"+index);
+});
+
+//console.log("Student Name"+s.name+"Student Id :"+s.id);
+console.log("************************Filter********************************");
+//immutable
+var filteredStudent=school.filter(function(a,index2){
+	if(a.age>25)
+		return true;
+	else 
+		return false;
+	
+});
+filteredStudent.forEach(function(s,index){
+	console.log("Student Name:"+s.name+" Student Id :"+s.id);
+	console.log("index"+index);
+});
+
+console.log("************************Map********************************");
+
+var filteredStudent1=school.map(function(b,index3){
+	if(b.age>25)
+		 b.status='senior';
+	return b;
+	
+});
+filteredStudent1.forEach(function(s,index){
+	console.log("Student Name:"+s.name+" Student Id :"+s.id+"status: "+s.status);
+	console.log("index"+index);
+});
+</script>
+</head>
+<body>
+
+</body>
+</html>

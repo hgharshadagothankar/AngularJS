@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+function User(uName,password,cpassword,genderName,jobstatus,dob){
+	this.uName=uName;
+	this.password=password;
+	this.cpassword=cpassword;
+	this.genderName=genderName;
+	this.jobstatus=jobstatus;
+	this.dob=dob;
+	console.log(uName+""+password+""+cpassword+""+genderName+""+jobstatus+dob);
+	
+}
+
+function submitValidate(){
+	alert("hii");
+	var uName=document.getElementById("uName").value;
+	var password=document.getElementById("password").value;
+	var cpassword=document.getElementById("cpassword").value;
+	var genderName=document.querySelector('input[name="gender"]:checked').value;	
+	var e = document.getElementById("status");
+	var jobstatus = e.options[e.selectedIndex].value;
+	var dob=document.getElementById("dob").value;
+	console.log(uName+""+genderName);
+	var userObj=new User(uName,password,cpassword,genderName,jobstatus,dob);
+	var userJSONText=JSON.stringify(userObj);
+	console.log(userJSONText);
+	localStorage.setItem(userObj.uName,userJSONText);
+	console.log("local storae"+localStorage.getItem(userObj.uName));
+	return false;
+}
+
+
+
+</script>
+</head>
+<body>
+
+<form action="login.html" onsubmit="return submitValidate()">
+
+<fieldset>
+<legend>Registration</legend>
+<label>UserName:</label><input type="text" name="uName" id="uName"> <br>
+<label>Password:</label><input type="password" name="password" id="password"><br>
+<label>Confirm Password:</label><input type="password" name="cpassword" id="cpassword"><br>
+<label>Job Status:</label><select name="status" id="status">
+<option>jr</option>
+<option>mid</option>
+<option>sr</option>
+</select><br>
+<label>Gender:</label><input type="radio" name="gender" id="gender" value="female">Female
+					  <input type="radio" name="gender" id="gender" value="male">Male<br>
+<label>DOB:</label><input type="date" name="dob" id="dob"><br>
+<label>Submit:</label><input type="submit" value="submit" ><br>
+<label>Reset:</label><input type="reset" value="reset"><br>
+
+
+
+</fieldset>
+
+</form>
+</body>
+</html>

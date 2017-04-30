@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+var names=['ramesh','suresh'];
+console.log(names[0]);
+var mulNames=new Array('seeta','geeta','seema','rakesh');
+console.log(mulNames[0]);
+//mulNames.push('keertha');
+console.log(mulNames[3]);
+var arrayName=new Array(1);
+console.log(arrayName[0]);
+
+arrayName.push('how are you');
+arrayName.push('i am fine');
+
+console.log(arrayName.length);
+arrayName.splice(0, 1);
+console.log(arrayName.length);
+
+
+console.log(arrayName.length);
+var deleteName='rakesh';
+for (var i = 0; i < mulNames.length; i++) {
+	if(mulNames[i]==deleteName){
+		mulNames.splice(i, 1);
+	}
+}
+console.log(mulNames);
+
+
+
+
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

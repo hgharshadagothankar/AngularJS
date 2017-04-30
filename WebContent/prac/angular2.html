@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="testCtrlModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+
+<script type="text/javascript">
+
+var module = angular.module("testCtrlModule", []);
+module.controller("testCtrl",function($scope){
+	$scope.names=["ramesh","suresh","dinesh"];
+	
+	
+});
+
+
+</script>
+</head>
+<body ng-controller="testCtrl">
+{{names}}
+<div ng-repeat="tempName in names">
+
+{{tempName}}
+</div>
+
+</body>
+</html>

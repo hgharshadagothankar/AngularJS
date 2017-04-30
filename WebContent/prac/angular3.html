@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="testCtrlModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+
+<script type="text/javascript">
+
+var module = angular.module("testCtrlModule", []);
+module.controller("testCtrl",function($scope){
+	//$scope.names=["ramesh","suresh","dinesh"];
+	var value1=10;
+	$scope.value2=20;
+	
+});
+
+
+</script>
+</head>
+<body ng-controller="testCtrl">
+<div>{{this}}</div>
+<div>{{value1||'no value found'}}</div>
+<div>{{value2||'no value found'}}</div>
+</body>
+</html>

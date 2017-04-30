@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="mainContainer">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+	var module = angular.module("mainContainer", []);
+	module.controller("loginController", function($scope) {
+		var userObj = [];
+		for (var i = 0; i < localStorage.length; i++) {
+
+			var key = localStorage.key(i);
+			var JSONObj = localStorage.getItem(key);
+			console.log(JSONObj);
+			var JSObj = JSON.parse(JSONObj);
+			userObj.push(JSObj);
+		}
+
+		$scope.employees = userObj;
+		$scope.loginControllerOnSubmit = function() {
+			var filterEmployee = $scope.employees.filter(function(e) {
+				if (e.password == $scope.password) {
+					return true;
+				} else {
+					return false;
+				}
+			});
+			$scope.employees = filterEmployee;
+
+		}
+
+		console.log(userObj);
+
+		/* var student={};
+		student.teacher={};
+		student.teacher.name='ramesh';
+		 */
+		$scope.selection = {};
+
+		$scope.selection.selectedView = "tableView.html";
+	});
+</script>
+</head>
+<body ng-controller="loginController">
+
+
+	<form action="">
+		<input type="radio" ng-model="selection.selectedView" value="listView.html">Display Table format<br> 
+		<input type="radio" ng-model="selection.selectedView" value="tableView.html">Display
+		List format<br> The selected view :{{selection.selectedView}}
+
+
+	</form>
+	<div>
+
+		<ng-include src="selection.selectedView"></ng-include>
+	</div>
+</body>
+</html>

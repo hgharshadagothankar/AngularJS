@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="mainContainer">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+	var module = angular.module("mainContainer", []);
+	module.controller("loginController", function($scope) {
+		var userObj = [];
+		for (var i = 0; i < localStorage.length; i++) {
+
+			var key = localStorage.key(i);
+			var JSONObj = localStorage.getItem(key);
+			console.log(JSONObj);
+			var JSObj = JSON.parse(JSONObj);
+			userObj.push(JSObj);
+		}
+		
+		$scope.employees = userObj;
+		$scope.loginControllerOnSubmit=function ()
+		{
+			var filterEmployee=$scope.employees.filter(function(e){
+				if(e.password == $scope.password){
+					return true;
+				}else{
+					return false;
+				}
+			});
+			$scope.employees=filterEmployee;
+			
+		}
+		
+		console.log(userObj);
+		
+		
+	});
+	
+</script>
+
+</head>
+<body ng-controller="loginController">
+	<form>
+		<fieldset>
+			<legend>Login</legend>
+			<label>UserName:</label><input type="text" name="uName"
+				ng-model="uName"> <br> <label>Password:</label><input
+				type="password" name="password" ng-model="password"><br>
+			<label>Submit:</label><input type="button" value="submit"
+				ng-click="loginControllerOnSubmit()"><br> <label>Reset:</label><input
+				type="reset" value="reset"><br>
+		</fieldset>
+
+	</form>
+
+	<div>
+		<h1>User Details:</h1>
+		<table border=1>
+			<tr>
+				<th>User Name</th>
+				<th>Password</th>
+				<th>Confirm Password</th>
+				<th>Gender</th>
+				<th>Job Status</th>
+				<th>DOB</th>
+			</tr>
+			<tr ng-repeat="e in employees">
+			<td>{{e.uName}}</td>
+			<td>{{e.password}}</td>
+			<td>{{e.cpassword}}</td>
+			<td>{{e.genderName}}</td>
+			<td>{{e.jobstatus}}</td>
+			<td>{{e.dob}}</td>
+				</tr>
+		</table>
+
+
+	</div>
+
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+
+
+Employee.prototype.attendanceMarking=function(){
+	console.log("Hoiiiiiiiiiiiii");
+}
+function Employee(id,name,salary){
+	this.id=id;
+	this.name=name;
+	this.salary=salary;
+	this.privilage=true;
+	this.display=function(){
+		console.log("display");
+	};
+}
+
+var ramesh=new Employee(1001,'ramesh',50000);
+var suresh=new Employee(1002,'suresh',50000);
+var dinesh=new Employee(1003,'dinesh',50000);
+
+var school=[ramesh,suresh,dinesh];
+var jsontext=JSON.stringify(ramesh);
+console.log(jsontext);
+
+var jSONParseObj=JSON.parse(jsontext);
+console.log(jSONParseObj.name);
+
+console.log("*****************Array******************");
+
+var jsontext=JSON.stringify(school);
+console.log(jsontext);
+var jSONParseObj=JSON.parse(jsontext);
+jSONParseObj.forEach(function(s,i){
+	
+	console.log("student name:"+s.name);	
+	
+});
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

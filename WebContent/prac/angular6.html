@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="testCtrlModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+
+<script type="text/javascript">
+
+var module = angular.module("testCtrlModule", []);
+module.controller("testCtrl",function($scope,$timeout){
+	//$scope.names=["ramesh","suresh","dinesh"];
+	$scope.employees=[{
+		employeeId:1001,
+		name:"Ramesh",
+		salary:100001
+	},
+	{
+		employeeId:1002,
+		name:"suresh",
+		salary:200001	
+	},{
+		employeeId:1003,
+		name:"dinesh",
+		salary:300001
+	},{
+		employeeId:1004,
+		name:"vijay",
+		salary:900001
+	},{
+		employeeId:1005,
+		name:"ajay",
+		salary:100001
+	},{
+		employeeId:1006,
+		name:"sonam",
+		salary:300001
+	}];
+	
+	$scope.someFunction=function(){
+		console.log($scope.salary);
+		$scope.tempName=$scope.salary;
+		var filterEmployee=$scope.employees.filter(function(employee){
+			
+			if(employee.salary>$scope.salary){
+				//return employee;
+				return true;
+			}else{
+				return false;
+			}
+		});
+		$scope.employees=filterEmployee;
+	}
+});
+
+
+</script>
+</head>
+<body ng-controller="testCtrl">
+Age:<input type="text" ng-model="age"> <br>
+Salary:<input type="text" ng-model="salary"> <br>
+Name:<input type="text" ng-model="name"> <br>
+<input type="button" value="ng-click" ng-click="someFunction()"><br>
+{{tempName}}
+<table border="1">
+
+<tr>
+<th>Emp ID</th>
+<th>Name</th>
+<th>salary</th></tr>
+<tr ng-repeat="e in employees">
+<td>{{e.employeeId}}</td>
+<td>{{e.name}}</td>
+<td>{{e.salary}}</td>
+</tr>
+</table>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<html ng-app="routeApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<h1>header</h1> 
+<div ng-view> </div>
+
+<a href="#red">Red</a>
+<a href="#green">Green</a>
+<a href="#blue">Blue</a>
+<a href="#brokeen">Broken</a>
+<h1>footer</h1>
+</body>
+
+<script src="angular.js"></script>
+<script src="angular-route.js"></script>
+<script>
+    var module=angular.module("routeApp",['ngRoute']);
+    module.config(function($routeProvider){
+ $routeProvider.when("/", {
+     templateUrl : "main.html"
+ })
+ .when("/red", {
+     templateUrl : "red.html"
+ })
+ .when("/green", {
+     templateUrl : "green.html"
+ })
+ .when("/blue", {
+     templateUrl : "blue.html"
+ }).when("/default", {
+     templateUrl : "main.html"
+ }).otherwise({redirectTo:"default"});
+    })
+</script>
+</html>

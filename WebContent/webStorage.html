@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+	
+
+function saveData(){
+	var localData=document.getElementById("localData").value;
+	var sessionData=document.getElementById("sessionData").value;
+	
+	localStorage.setItem('localkey', localData);
+    sessionStorage.setItem('sessionkey', sessionData);
+}
+
+function loadData(){
+	
+	var localData1=localStorage.getItem('localkey');
+	var sessionData1=sessionStorage.getItem('sessionkey');
+	alert("local value"+localData1);
+	alert("sessionData value"+sessionData1);
+}
+</script>
+</head>
+<body>
+
+
+<form action="">
+<fieldset>
+	<legend>Web Storage</legend>
+	<label for="localData">This is into local Storage:</label>
+	<input id="localData" type="text"><br>
+	
+	<label for="sessionData">This is into Session Storage:</label>
+	<input id="sessionData" type="text"><br>
+	<div>
+	<button onclick="saveData()"> Save Data</button>
+	<button onclick="loadData()"> Load Data</button>
+	</div>
+</fieldset>
+</form>
+</body>
+</html>

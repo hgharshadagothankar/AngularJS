@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+Employee.prototype.attendanceMarking=function(){
+	console.log("marking");
+}
+
+function Employee(empId,name,age){
+	this.name=name;
+	this.age=age;
+	this.empId=empId
+};
+
+function Manager(managerId,name,age,projectId){
+	Employee.call(this,name,age)
+	this.projectId=projectId
+};
+
+Manager.prototype=Object.create(Employee.prototype);
+
+Manager.prototype.projectManager=function(){
+	console.log("project manage")
+}
+var ramesh=new Manager('M001','ramesh',34,'Po01');
+ramesh.attendanceMarking();
+ramesh.projectManager();
+</script>
+</head>
+<body>
+
+</body>
+</html>

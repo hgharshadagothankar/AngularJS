@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+Pet.prototype.animalClass=function(sound){
+	        this.sound=sound;
+			console.log("animal class "+(this.name));
+			return this.sound;
+		}
+Wild.prototype.animalClass=function(sound){
+    this.sound=sound;
+	console.log("animal class "+(this.name));
+	return this.sound;
+}
+function Pet(walk,legs){
+	console.log("inside pet");
+	this.walk=walk;
+	this.legs=legs;
+}
+function Wild(walk,legs){
+	console.log("inside wild");
+	this.walk=walk;
+	this.legs=legs;
+}
+function Dog(name,breed,walk,legs){
+	Pet.call(walk,legs);
+	Wild.call(walk,legs);
+	this.name=name;
+	this.breed=breed
+	
+}
+Dog.prototype=Object.create(Pet.prototype);
+Dog.prototype=Object.create(Wild.prototype);
+
+var motiDogObj=new Dog('moti','hound','walk',4)
+console.log(motiDogObj.name);
+console.log(motiDogObj.animalClass('boww'));
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

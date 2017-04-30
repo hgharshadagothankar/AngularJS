@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+
+<script type="text/javascript">
+
+var employeePrototypeObj={
+		attendMarking:function(){
+			console.log("attendance marking "+(this.name));
+		//	return 8;
+		}
+}
+
+var rameshObj={
+		name:"ramesh",
+		age:50,
+		empId:"E001",
+		__proto__:employeePrototypeObj
+		
+};
+var sureshObj={
+		name:"suresh",
+		age:50,
+		empId:"E002",
+		__proto__:employeePrototypeObj
+		
+		
+};
+rameshObj.attendMarking();
+sureshObj.attendMarking();
+
+employeePrototypeObj.bonus=function(){
+	console.log('bonus');
+}
+
+rameshObj.bonus();
+</script>
+</head>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+var a=20;
+console.log("value of a: "+ typeof a)
+//console.log("instance of a: "+ a instanceOf number);
+function mylogs(){
+	
+	var b='VALUE OF B';
+	var result=0;
+	console.log("inside 2 paras");
+	for(var i=0;i<arguments.length;i++){
+		result+=arguments[i];
+		console.log("value of inside for:"+arguments[i])
+	}
+	return result;
+}
+function callingfunstion(){
+	return 9;
+}
+
+var value_callingfunstion=callingfunstion;
+
+function display(value_callingfunstion){
+	return callingfunstion();
+}
+console.log("value   "+value_callingfunstion);
+console.log("display"+display(value_callingfunstion));
+//console.log("value of b: "+ mylogs(1,2,3,4,5,5));
+//console.log("value of b: "+ mylogs(2));
+
+
+var customerObj={
+		name:"harshada",
+		age:50,
+		empId:"E001",
+		funcvar:function(){
+			console.log("name "+(this.name));
+			return 4;
+		}
+		
+};
+customerObj.address="90 beacon";
+delete customerObj.name;
+console.log("customerObj   "+customerObj.funcvar());
+console.log("customerObj   "+customerObj.name);
+console.log("customerObj   "+customerObj['address']);
+</script>
+</head>
+<body>
+<h1>hiiiiiiiiiiiii</h1>
+</body>
+</html>

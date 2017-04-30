@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html ng-app="testCtrlModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+
+<script type="text/javascript">
+	//console.log(angular);
+
+	var module = angular.module("testCtrlModule", []);
+	module.controller("testCtrl",function($scope){
+		//$scope.data="hi from controller";
+		
+		$scope.someFunction=function(){
+			console.log("inside some function");
+			$scope.data="hi from controller";
+		}
+	});
+</script>
+</head>
+<body ng-controller="testCtrl">
+{{data}}
+
+
+<div ng-click="someFunction()">
+Click me
+</div>
+
+
+</body>
+</html>

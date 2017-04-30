@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+Pet.prototype.makeSound=function(){
+	console.log("make sound :"+this.sound);
+	return this.sound;
+}
+function Pet(ptype,sound){
+	this.ptype=ptype;
+	this.sound=sound;
+	console.log("interface Pet Calling"+this.ptype);
+	//console.log(new Pet('sas','asasa').makeSound()); 
+}
+
+function Dog(type,breed,name,sound){
+	Pet.call(this,type,sound);
+	this.breed=breed;
+	this.name=name;
+	
+	return this.name;
+}
+Dog.prototype=Object.create(Pet.prototype);
+Dog.prototype.roaming=function(){
+	console.log(this.breed+" romaing");
+}
+
+
+var puppyObj=new Dog('pet','hound','mothi','bow');
+
+
+puppyObj.roaming();
+console.log(puppyObj.makeSound());
+console.log(puppyObj.breed);
+console.log(puppyObj.ptype);
+</script>
+</head>
+<body>
+
+</body>
+</html>

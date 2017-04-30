@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html ng-app="studentManagementModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script src="ServiceDay11.js"></script>
+<link rel="stylesheet" href="style.css"></link>
+<link rel="stylesheet"
+	href="../bootstrap-3.3.7-dist/css/bootstrap.min.css"></link>
+<script type="text/javascript">
+	var module = angular.module("studentManagementModule", [ 'serviceModule' ]);
+	console.log(angular);
+	module.controller("courseController", function($scope,
+			greetingService, $http) {
+		$scope.Greet=greetingService.sayHI();
+		var courseDet=[];
+		$scope.helloOnClick=function(){
+			var promise=greetingService.getPromise();
+			var successOBJ=function(response){   //then
+				// courseDet.push(response);
+				$scope.courses=response.data;
+				console.log(response.status);
+			};
+			var failureOBJ=function(response){   //then
+				// courseDet.push(response);
+				if(response.status==404)
+				console.log("status Code"+response.status);
+			};
+			promise.then(successOBJ,failureOBJ);
+			$scope.Greet=greetingService.sayHello();
+		}
+		
+	});
+	
+</script>
+</head>
+<body>
+
+<div ng-controller="courseController">
+{{Greet}}
+<br>
+<input type="button" ng-click="helloOnClick()" value="hello">
+
+<h1>User Details:</h1>
+		<table border=1 class="table table-striped">
+			<tr class="Success">
+				<th>Course Id</th>
+				<th>Course Name</th>
+				<th>Duration</th>
+				<th>Fees</th>
+				
+			</tr>
+			<tr ng-repeat="courseOBJ in courses">
+				<td>{{courseOBJ.courseId}}</td>
+				<td>{{courseOBJ.courseName}}</td>
+				<td>{{courseOBJ.duration}}</td>
+				<td>{{courseOBJ.fees}}</td>
+				
+			</tr>
+		</table>
+
+
+</div>
+	
+</body>
+</html>

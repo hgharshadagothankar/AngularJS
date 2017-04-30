@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="testCtrlModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
+<script type="text/javascript">
+	console.log(angular);
+
+	var module = angular.module("testCtrlModule", ['ngRoute']);
+	/* module.controller("testCtrl", function($scope) {
+		
+	}); */
+	//config phase,only provider is available in .config phase
+	module.config(function($routeProvider){
+		console.log("configuration phase");
+		console.log("routeProvider");
+		console.log($routeProvider);
+		console.log("route");
+		console.log($route);
+	});
+	//run phase
+	module.run(function($route){
+		
+		console.log($route);
+	})
+</script>
+</head>
+<body ng-controller="testCtrl">
+	
+
+
+</body>
+</html>

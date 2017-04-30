@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+Dog.prototype.animalClass=function(){
+			console.log("animal class "+(this.name));
+			return 8;
+		}
+
+function Dog(name,breed,sound){
+	this.name=name;
+	this.breed=breed;
+	this.sound=sound
+	
+}
+var motiDogObj=new Dog('moti','hound','boww')
+console.log(motiDogObj.name);
+console.log(motiDogObj.animalClass());
+</script>
+</head>
+<body>
+
+</body>
+</html>

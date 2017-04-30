@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+<div>
+		<h1>User Details:</h1>
+		<table border=1>
+			<tr>
+				<th>User Name</th>
+				<th>Password</th>
+				<th>Confirm Password</th>
+				<th>Gender</th>
+				<th>Job Status</th>
+				<th>DOB</th>
+			</tr>
+			<tr ng-repeat="e in employees">
+			<td>{{e.uName}}</td>
+			<td>{{e.password}}</td>
+			<td>{{e.cpassword}}</td>
+			<td>{{e.genderName}}</td>
+			<td>{{e.jobstatus}}</td>
+			<td>{{e.dob}}</td>
+				</tr>
+		</table>
+
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+function demo(param1,param2){
+	console.log("inside demo");
+	console.log(arguments[0]);
+	console.log(arguments[1]);
+}
+var addFunobj=function add(x,y){
+	return x+y;
+}
+
+var subFunobj=function(param1,param2){
+	return ""+(param1-param2);
+}
+
+
+var addFun=new Function('param1','param2','param1+param2');//last is return parameter
+addFun.name='harshada';
+demo(4,5);
+console.log(addFunobj.length);
+console.log(addFunobj.name);
+console.log(addFunobj('param1','param2'));
+console.log(subFunobj(4,5));
+console.log(addFun);
+</script>
+</head>
+<body>
+
+</body>
+</html>

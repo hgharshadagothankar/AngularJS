@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript">
+var a=10;
+var b=20;
+console.log(this==window); //global or window obj
+console.log(a); 
+function demo(){
+	console.log(this); //global or window obj
+}
+function test(c,d){
+	var a=67;
+	console.log(a);
+	console.log("calling this a");
+	console.log(this.a);
+	console.log(this.b);
+	console.log(c); //this not allowed for global variables
+	//console.log(this.d); //this not allowed for global variables
+	console.log(d); 
+}
+var obj={
+		a:3,
+		b:4,
+		display:function(){
+			var c=5;
+			console.log(a); 
+			console.log("function of window"); 
+			console.log(this==window); //current obj
+		}
+}
+demo();
+obj.display();
+
+//test(45,87);
+//test.call(obj,90,80); //function is a object
+//test.apply(obj,[90,80]); //apply
+test=test.bind(obj); //bind
+test(12,7);
+
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

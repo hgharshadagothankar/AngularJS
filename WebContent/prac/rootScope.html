@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="testCtrlModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+
+<script type="text/javascript">
+	console.log(angular);
+
+	var module = angular.module("testCtrlModule", []);
+	module.controller("testCtrl1", function($scope,$rootScope) {
+	$scope.names=["ramhes","suresh","dinesh"];
+	$scope.someFunction=function(){
+		var obj={name:$scope.name};
+	    $rootScope.$broadcast("passingEvent",obj);
+	}
+	});
+	module.controller("testCtrl2", function($scope) {
+		//$scope.names=["ramhes","suresh","dinesh"];
+		
+		$scope.$on("passingEvent",function(event,args){
+			console.log(event);
+			console.log(args);
+			$scope.name1=args.name;
+		});
+		});
+</script>
+</head>
+<body>
+
+	<div ng-controller="testCtrl1">
+		<select ng-options="name for name in names" ng-model="name"></select>
+		<input type="button" ng-click="someFunction()" value="Submit">
+		{{name}}
+	</div>
+	
+	<div ng-controller="testCtrl2">
+		<!-- <select ng-options="name for name in names" ng-model="name"></select> -->
+		
+		{{name1|| 'Not available'}}
+	</div>
+</body>
+</html>
