@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html ng-app="mainApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script>
+	
+	var module = angular.module("mainApp", []);
+	module.controller("mainCtrl", function($q) {
+		var deferred = $q.defer();
+		console.log(deferred);
+		console.log(deferred.promise);
+		//console.log(promise);
+	});
+</script>
+</head>
+<body ng-controller="mainCtrl">
+
+</body>
+</html>

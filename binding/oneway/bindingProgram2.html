@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html ng-app="oneWayBinding">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="angular.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script>
+        var module=angular.module("oneWayBinding",[]);
+
+        module.controller("demoController",function($scope,$interval,$timeout){
+
+            var value1=20;
+            $scope.value2=10;
+
+            $scope.changeValue=function(){
+                $scope.value2+=10;
+            }
+        })
+
+
+    </script>
+</head>
+<body ng-controller="demoController">
+
+<div class="well">
+
+var value: {{value1 || "no value found"}} <br><br>
+using '{'{}'}' $scope.value: {{value2}}<br>
+using ng-bind    $scope.value: <span ng-bind="value2"></span><br><br>
+
+<button class="btn-primary" ng-click="changeValue()">changevalue </button> <br><br>
+
+<div ng-non-bindable>
+    <h3>Inside ng-non-bindable</h3>
+    using expression $scope.value: {{value2}}<br>
+    using ng-bind    $scope.value: <span ng-bind="value2"></span>
+</div>
+
+</div>
+
+
+</body>
+</html>

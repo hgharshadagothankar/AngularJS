@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html ng-app="oneWayBinding">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="angular.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script>
+        var module=angular.module("oneWayBinding",[]);
+        module.controller("demoController",function($scope){
+            $scope.value1=10;
+            $scope.value2=$scope.value1*2;
+            console.log($scope)
+        })
+    </script>
+    
+
+</head>
+
+<body ng-controller="demoController">
+
+<div class="well">
+
+    Input value is {{value1}}
+
+    <input type="text" class="form-control" ng-model="value1"><br>
+    <input type="text" class="form-control" ng-model="value2"><br>
+    <div class="alert-danger">
+        Mulitply by 2:  {{value2}}
+    </div>
+</div>
+
+
+</body>
+</html>

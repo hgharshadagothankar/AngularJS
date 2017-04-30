@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="oneWayBinding">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+     <script src="angular.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script>
+        var module=angular.module("oneWayBinding",[]);
+        module.controller("demoController",function($scope){
+            $scope.employees=[
+                {
+                    "employeeID":1001,
+                    "name":"Ramesh",
+                    "salary":40000
+                },{
+                    "employeeID":1002,
+                    "name":"suresh",
+                    "salary":50000
+                },
+                {
+                    "employeeID":1003,
+                    "name":"Dhinesh",
+                    "salary":70000
+                },{
+                    "employeeID":1004,
+                    "name":"Mahesh",
+                    "salary":80000
+                }
+            ];
+        })
+
+    </script>
+</head>
+<body ng-controller="demoController">
+<div class="well">
+<input type="radio" name="selecion" ng-model="selection.selectedView" value="tableView.html"> Display Table format</br>
+<input type="radio" name="selecion" ng-model="selection.selectedView" value="listView.html"> Display List format</br>
+The Selected View is {{selection.selectedView}} <br>
+</div>
+
+
+</body>
+</html>

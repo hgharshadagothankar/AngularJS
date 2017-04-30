@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html ng-app="oneWayBinding">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="angular.min.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <script>
+        var module=angular.module("oneWayBinding",[]);
+
+        module.controller("demoController",function($scope,$interval,$timeout){
+            $scope.value1=10;
+            $scope.value2=10;
+
+            $timeout(function(){
+                $scope.value1+=10;
+                console.log($scope);
+                console.log($scope.value2);
+            },2000)
+
+
+            setTimeout(function(){
+                $scope.$apply(function(){
+                        $scope.value2+=10;
+                        console.log($scope.value2);
+
+
+                })},2000)
+        })
+
+
+    </script>
+</head>
+<body ng-controller="demoController">
+
+<div class="well">
+<div class="page-header">Changing both the value after two seconds </div>
+<div class="alert-success">$scope.value 1: {{value1}}</div>
+<div class="alert-success">$scope.value 2: {{value2}}</div>
+</div>
+
+
+</body>
+</html>
