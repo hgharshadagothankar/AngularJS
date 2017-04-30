@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html ng-app="mainContainer">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+	var module = angular.module("mainContainer", []);
+
+	module.factory("hello",
+		function()
+		{
+		
+		var obj={msg:"hello from factory"}
+		
+		return obj;
+		}
+	);
+	
+	module.controller("reg", function($scope,hello) {
+		
+		$scope.msg=hello.msg;
+	
+		});
+	
+</script>
+</head>
+<body ng-controller="reg">
+
+<div>
+{{msg}}
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html ng-app="studentManagementModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script src="course.js"></script>
+<link rel="stylesheet" href="style.css"></link>
+<link rel="stylesheet"
+	href="../bootstrap-3.3.7-dist/css/bootstrap.min.css"></link>
+<script type="text/javascript">
+	var module = angular.module("studentManagementModule", [ 'courseModule' ]);
+
+	module.controller("courseController", function($scope,
+			courseRegistrationService, $rootScope) {
+
+		$scope.courseValidate = function() {
+			courseRegistrationService.insertEmployee($scope.course);
+			$rootScope.$broadcast("passingEvent", $scope.course);
+		};
+
+	});
+	module.controller("displayContent", function($scope, courseDetailsService) {
+        // alert("inside controller");
+        var userObj=courseDetailsService.getCourseDetails();
+		$scope.$on("passingEvent", function(event, args) {
+			console.log("inside controller"+courseDetailsService.getCourseDetails());
+			//$scope.courses = courseDetailsService.getCourseDetails();
+			$scope.courses.push(args);
+		});
+	
+		$scope.courses = userObj;
+
+	});
+</script>
+</head>
+<body>
+	<header>COURSE MANAGEMENT SYSTEM</header>
+	<div ng-controller="courseController">
+		<fieldset>
+			<legend>Course Registration</legend>
+			<label>Course Id:</label><input type="text" ng-model="course.courseId" id="courseId"><br>
+			<label>Course Name:</label><input type="text" ng-model="course.courseName" id="courseName"> <br> 
+			
+			<label>Duration:</label><input type="text" ng-model="course.duration" id="duration"><br> 
+		    <label>Fees:</label><input type="text" ng-model="course.fees" id="fees"><br> 
+			 
+			  <label>Submit:
+			</label><input type="button" value="submit" ng-click="courseValidate()">
+			<br> <label>Reset:</label><input type="reset" value="reset"><br>
+		</fieldset>
+	</div>
+	<div ng-controller="displayContent">
+		<h1>User Details:</h1>
+		<table border=1 class="table table-striped">
+			<tr class="Success">
+				<th>Course Id</th>
+				<th>Course Name</th>
+				<th>Duration</th>
+				<th>Fees</th>
+				
+			</tr>
+			<tr ng-repeat="courseOBJ in courses">
+				<td>{{courseOBJ.courseId}}</td>
+				<td>{{courseOBJ.courseName}}</td>
+				<td>{{courseOBJ.duration}}</td>
+				<td>{{courseOBJ.fees}}</td>
+				
+			</tr>
+		</table>
+
+
+	</div>
+
+	<footer>
+		<p>Copyright @ 2014</p>
+	</footer>
+</body>
+</html>

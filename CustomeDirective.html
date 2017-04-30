@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+    var module=angular.module("myModule",[]);
+    module.controller("displayCtrl",function($scope){
+    	console.log('inside displayCtrl');
+    	$scope.name='harshada';
+    });
+   /*  module.directive("helloWorld",function(){
+    	return {
+    		
+    	templateUrl:"shoppingCart.html"
+    	}
+    })
+ */
+ module.directive("helloWorld",function(){
+     { 
+         return {
+        	 template:'keerthana',
+             link: function (scope,element,attr) {
+                 console.log('inside link function');
+                 console.log(scope);
+                 //scope.value="changed content";
+             }
+         }
+     }
+ });
+ 
+ module.directive("attributeDir",function(){
+ 	return {
+ 		
+ 	template:"name:{{name}}",
+ 	restrict:'A', 
+ 	link:function(scope,element,attr){
+ 		scope.name='ramesh changed value';
+ 		console.log('inside link');
+ 		console.log("scope"+scope.name);
+ 		console.log(attr);
+ 		console.log("element"+element);
+ 		element.html(" attribute value: "+attr['attributeDir'] +"<br> scope value: "+scope.name);
+ 	},
+ 	controller:function($scope){
+        console.log('inside the directive controller');
+        console.log($scope);
+    }
+ 	}
+ })
+/*
+ * 
+ module.directive("attributeDir",function(){
+     {
+         return {
+             restrict: "A",
+             link: function (scope,element,attr) {
+                 console.log('inside link function');
+                 console.log(scope);
+                 //scope.value="changed content";
+                 console.log(attr['attributeDir']);
+                 element.html(" attribute value: "+attr['attributeDir'] +"<br> scope value: "+scope.value);
+             },
+             controller:function($scope){
+                 console.log('inside the directive controller');
+                 console.log($scope);
+             }
+         }
+     }
+ })
+ 
+ */
+
+</script>
+</head>
+<body ng-controller="displayCtrl">
+	<div  attribute-dir="hiii for directive">
+	
+		
+		<br> {{name}} <br>
+		
+	</div>
+	<br>
+	HELLO WORLD TAG
+	<hello-world></hello-world>
+</body>
+</html>

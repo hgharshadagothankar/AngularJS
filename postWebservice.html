@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html ng-app="simplemodule">
+<head lang="en">
+<meta charset="UTF-8">
+<title></title>
+<script src="angular.min.js"></script>
+<script>
+        var module=angular.module("simplemodule",[])
+ // jar
+ // lib
+ // post
+        //
+  
+
+        module.controller("saveController" ,function($scope,$http,$rootScope) {
+             $scope.submitForm=function(){
+                console.log($scope.message);
+                var promise=$http.post("http://localhost:8080/MyFirstWebProject/rest/studentService/insert",$scope.message);
+                promise.then(success,error);
+                
+                function error(response, status, headers, config) {
+                    alert( "error: " + status);
+                }
+
+                function success(response, status, headers, config) {
+                	console.log("Inside on success");
+                	console.log(response);
+                	console.log("outSide on success");
+                   // $scope.students = response.data;
+                    
+                }
+                $rootScope.$broadcast("passingEvent", $scope.message);  
+            };
+           // return false;
+        	$scope.$on("passingUpdatedEvent", function(event, args) {
+        		$scope.message=args;
+
+    		}); 
+        	$scope.updateFunction=function(){
+        		 var promiseObj=$http.put("http://localhost:8080/MyFirstWebProject/rest/studentService/update",$scope.message);
+        		 promiseObj.then(successFun,errorFun); 
+        		 
+        		 function successFun(response, status, headers, config) {
+               	 console.log("Inside on deleted update");
+               	console.log(response);
+               	console.log("outSide on success update");
+               	$rootScope.$broadcast("passingEvent", $scope.message);  
+               	}
+        		 function errorFun(response, status, headers, config) {
+                     alert( "error: " + status);
+                 } 
+                 
+        	};
+           
+           return false;
+           
+        });
+        
+        module.controller("displayController",function($scope,$http,$rootScope){
+        
+        	
+        	$scope.$on("passingEvent", function(event, args) {
+        		/*  alert("passingEvent displayController"+args.name);
+        		console.log("Inside on passingEvent displayController");
+        		console.log(args);  */
+    			//$scope.students.push(args);
+        		$scope.getStudents();
+
+    		});
+        	
+        	$scope.deleteFunction=function(){
+        		alert("insode delete"+$scope.selectedId);
+        		var promise=$http.delete("http://localhost:8080/MyFirstWebProject/rest/studentService/delete?id="+$scope.selectedIDByName);
+        		promise.then(success,error);
+                
+                function error(response, status, headers, config) {
+                    alert( "error: " + status);
+                }
+
+                function success(response, status, headers, config) {
+                	console.log("Inside on deleted");
+                	console.log(response);
+                	console.log("outSide on success delete");
+                    //$scope.students.push(response);
+                	$scope.getStudents();
+                    
+                }
+        	};
+        	$scope.populate=function(){
+        	
+        		$scope.message={}; //cleaning all text field
+        		console.log($scope.students);
+        		angular.forEach($scope.students,function(s){
+        			//alert("inside for es=ach");
+        			if(s.id == $scope.selectedIDByName){
+        				//$scope.message=s;
+        			var SOBJ={};
+        			SOBJ.id=s.id;
+        			SOBJ.name=s.name;
+        			SOBJ.age=s.age;
+        			SOBJ.marks=s.marks;
+        			$rootScope.$broadcast("passingUpdatedEvent",SOBJ);
+        			}
+        			
+        		});	
+        		
+        		console.log($scope.message);
+        			
+        	};
+        	
+        	
+        	
+        	$scope.getStudents=function(){ $http.get("http://localhost:8080/MyFirstWebProject/rest/studentService/studentxml").then(function(response){
+        		$scope.students= response.data;
+        	}); 
+        	
+        	};
+        	$scope.getStudents();
+        });
+    </script>
+
+
+</head>
+<body >
+	
+	<div ng-controller="saveController" >
+	Print:{{message}}
+		<form method="post" ng-submit="submitForm()">
+			Student ID <input type="text" id="sID" name="sID"
+				ng-model="message.id"> <br> Name:<input type="text"
+				id="sname" name="sname" ng-model="message.name"><br>
+			Marks:<input type="text" id="smarks" name="smarks"
+				ng-model="message.marks"><br> Age:<input type="text"
+				id="age" name="age" ng-model="message.age"><br>
+				
+				 <input
+				type="submit" value="insert"><br> <input type="button"
+				ng-click="updateFunction()" value="Update" />
+
+
+
+		</form>
+
+	</div>
+	<div ng-init="myCol='lightblue'" ng-controller="displayController" style=background-color:{{myCol}}>
+		<h1>Student Details:</h1>
+		
+		COLOR:<input  ng-model="myCol" value="{{myCol}}">
+		<table border=1 class="table table-striped">
+			<tr class="Success">
+				<th>ID</th>
+				<th>Student Id</th>
+				<th>Student Name</th>
+				<th>Marks</th>
+				<th>Age</th>
+
+			</tr>
+			<tr ng-repeat="e in students">
+				<td><input type="radio" ng-model="$parent.selectedIDByName" name="id"
+					value="{{e.id}}" /></td>
+				<td>{{e.id}}</td>
+				<td>{{e.name | uppercase}}</td>
+				<td >{{e.marks}}</td>
+				<td>{{e.age}}</td>
+
+			</tr>
+			<tr>
+				<td colspan="2"><input type="button" value="Delete"
+					ng-click="deleteFunction()" /></td>
+				<td colspan="2"><input type="button" value="Update"
+					ng-click="populate()" /></td>
+			</tr>
+		</table>
+
+	</div>
+</body>
+</html>

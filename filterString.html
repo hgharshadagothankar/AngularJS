@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+    var module=angular.module("myModule",[]);
+    module.controller("displayCtrl",function($scope){
+    	$scope.students=["harshada","keerthana","harsh","keer","keee","keertha"];
+    	$scope.filterByName=function(e){
+    		console.log("Filter By Name:");
+    		console.log(e);
+    		var string = e;
+    	   var  substring = ($scope.name);
+    	   var result=  string.includes(substring);
+    		if(result || $scope.name==null)
+    		return true;
+    	}
+    });
+    
+
+
+</script>
+</head>
+<body>
+	<div ng-controller="displayCtrl">
+	Name:<input type="text" ng-model="name"/>
+	<ul ng-repeat="s in students|filter:filterByName">
+	<li>{{s}}</li>
+	</ul>
+	</div>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!-- pass by function -->
+<!DOCTYPE html>
+<html ng-app="directivesModuleApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="angular.min.js"></script>
+
+    <script>
+        var module=angular.module('directivesModuleApp',[])
+
+        module.directive('myScopeExample', function () {
+            return {
+                scope:{
+                	emp: '=',
+                    action: '&'
+                },
+
+                template: 'Name: {{ emp.name }} age: {{emp.age}} ' +
+                '<button ng-click="action()">Change Data</button>',
+
+                link:function(scope,attr){
+                    scope.emp.age=45;
+                    console.log(scope);
+                    console.log(attr);
+                    console.log(arguments);
+                }
+            };
+        });
+
+        module.controller('nameController',function($scope){
+            $scope.employee={name:'ramesh',age:17};
+            $scope.name='ramesh';
+
+            var counter=17;
+            $scope.changeData = function () {
+                counter++;
+                $scope.employee = {
+                    name: 'dinesh',
+                    age: counter
+                };
+            };
+
+        })
+
+
+    </script>
+</head>
+<body ng-controller="nameController">
+{{employee}}
+
+<!--
+<my-scope-example attrName="{{employee.name}}"></my-scope-example>
+-->
+<div my-scope-example emp="employee" action="changeData()"></div>
+
+</body>
+</html>
+
+<!-- 
+pass by reference
+
+<html ng-app="directivesModuleApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="angular.min.js"></script>
+
+<script>
+    var module=angular.module('directivesModuleApp',[])
+
+    module.directive('myScopeExample', function () {
+        return {
+        //	scope:{}, //isolated ,once isolated we have to send values
+            scope:{
+            	employee: '='  //two way binding
+            }, 
+            template: 'Name: {{employee.name}} Street: {{employee.age}}',
+            link:function(scope,element,attr){
+            	scope.employee.age=45;
+            	console.log("scope");
+            	console.log(scope);
+            	console.log("attr");
+            	console.log(attr);
+            }
+        };
+    });
+
+    module.controller('nameController',function($scope){
+        $scope.employee={name:'ramesh',age:17};
+    })
+
+
+</script>
+</head>
+<body ng-controller="nameController">
+{{employee.age}}<br>
+<my-scope-example attrname="{{employee.name}}"></my-scope-example>
+<div my-scope-example employee="employee"></div>
+</body>
+</html>
+
+ -->
+
+<!-- 
+Pass value,1 way binding
+<html ng-app="directivesModuleApp">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="angular.min.js"></script>
+
+<script>
+    var module=angular.module('directivesModuleApp',[])
+
+    module.directive('myScopeExample', function () {
+        return {
+        //	scope:{}, //isolated ,once isolated we have to send values
+            scope:{
+            	name: '@attrname'  //string=?@
+            }, 
+            template: 'Name: {{name}} Street: {{age}}',
+            link:function(scope,element,attr){
+            	console.log("scope");
+            	console.log(scope);
+            	console.log("attr");
+            	console.log(attr);
+            }
+        };
+    });
+
+    module.controller('nameController',function($scope){
+        $scope.employee={name:'ramesh',age:17};
+    })
+
+
+</script>
+</head>
+<body ng-controller="nameController">
+<my-scope-example attrname="{{employee.name}}"></my-scope-example>
+</body>
+</html> -->

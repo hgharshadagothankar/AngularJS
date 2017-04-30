@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="studentManagementModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script src="ServiceDay11.js"></script>
+<link rel="stylesheet" href="style.css"></link>
+
+<script type="text/javascript">
+	var module = angular.module("studentManagementModule", [ 'serviceModule' ]);
+	console.log(angular);
+	module.controller("courseController", function($scope,
+			greetingService, $http,$timeout,$q) {
+		$scope.Greet=greetingService.sayHI();
+		
+		
+		/* INTERNAL WORING OF PROMISE */
+		
+		function deferredTimer(success){
+			var  deferred=$q.defer();
+			$timeout(function(){
+				deferred.notify({message:"This is noyify!!"});
+				if(success){	
+					deferred.resolve({message:"This is great!!"});
+				}else{
+					deferred.reject({message:"Really bad!"});
+				}
+				
+			},1000);
+			/* var promiseOBJ=deferred.promise;
+			return promiseOBJ; */
+			return deferred.promise;
+		}
+		$scope.check=function(boo){
+			deferredTimer(boo).then(function(response){
+				console.log(response);
+			},function(error){
+				console.log(error);
+			
+			},function(msg){
+				console.log("notify will execute either success or failure");
+				console.log(msg);
+			
+			})
+		}
+		
+	});
+	
+</script>
+</head>
+<body>
+
+	<div ng-controller="courseController">
+		{{Greet}} <br> <input type="button" ng-click="helloOnClick()"
+			value="hello"> <input type="button" ng-click="check(true)"
+			value="check true"> <input type="button" ng-click="check()"
+			value="check true">
+
+		<!-- <h1>User Details:</h1>
+		<table border=1 class="table table-striped">
+			<tr class="Success">
+				<th>Course Id</th>
+				<th>Course Name</th>
+				<th>Duration</th>
+				<th>Fees</th>
+
+			</tr>
+			<tr ng-repeat="courseOBJ in courses">
+				<td>{{courseOBJ.courseId}}</td>
+				<td>{{courseOBJ.courseName}}</td>
+				<td>{{courseOBJ.duration}}</td>
+				<td>{{courseOBJ.fees}}</td>
+
+			</tr>
+		</table> -->
+
+
+	</div>
+
+</body>
+</html>

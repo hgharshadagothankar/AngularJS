@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+
+<script src="shoppingcart.js"></script>
+<script type="text/javascript" src="angular-filter.js"></script>
+<script type="text/javascript">
+	var module = angular.module("myModule", [ 'angular.filter',
+			'ShoppingService' ]);
+
+	/*
+	SERVICE CODE
+	var module=angular.module("ShoppingService",[]);
+	module.service("addService",function(){
+	var addproducts=[];
+	this.addShopping=function(pObj){
+		addproducts.push(pObj);
+	};
+	this.getProducts=function(){
+		return addproducts;
+	};
+	this.deleteProducts=function(pObj){
+		//addproducts.remove(pObj);
+		console.log("P Obj id:"+pObj.id);
+		//addproducts.splice(pObj.id,1);
+		addproducts.forEach(function(s,i){
+			if(s.id==pObj.id)
+				addproducts.splice(i,1);	
+		});
+		
+	};
+	});
+	
+	
+	
+	 */
+
+	module.controller("CategoryCtrl", function($scope, addService) {
+		//var selectedProducts = [];
+		$scope.products = [ {
+			name : 'Sony',
+			category : 'TV',
+			id : 1,
+			price : 45000
+		}, {
+			name : 'Samsung',
+			category : 'TV',
+			id : 2,
+			price : 95000
+		}, {
+			name : 'oppo',
+			category : 'mobile',
+			id : 3,
+			price : 15000
+		}, {
+			name : 'Nokia',
+			category : 'mobile',
+			id : 4,
+			price : 8000
+		}, {
+			name : 'apple',
+			category : 'mobile',
+			id : 5,
+			price : 8000
+		}, {
+			name : 'Harry Potter',
+			category : 'books',
+			id : 6,
+			price : 400
+		} ];
+		$scope.checkOut = function() {
+			$scope.selectedProd = addService.getProducts();
+		}
+
+		$scope.filterName = function(prod) {
+			if (prod.category == $scope.selectedProduct
+					|| $scope.selectedProduct == null)
+				return true;
+		}
+		$scope.selectedCategoryHandler = function(prod) {
+			$scope.selectedProduct = prod;
+		}
+
+		$scope.addToCart = function(pid) {
+			angular.forEach($scope.products, function(p) {
+				if (p.id == pid) {
+					addService.addShopping(p);
+				}
+			});
+		}
+		$scope.deleteToCart = function(pid) {
+			angular.forEach($scope.products, function(p) {
+				if (p.id == pid) {
+					addService.deleteProducts(p);
+				}
+			});
+
+		}
+
+	});
+</script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+
+
+	<div ng-controller="CategoryCtrl">
+		<div class="col-xs-3">
+			<a class="btn btn-block btn-default btn-ln"
+				ng-click="selectedCategoryHandler()">Home</a>
+
+			<!-- For unique use angular-filter.js -->
+			<a class="btn btn-block btn-default btn-ln"
+				ng-repeat="e in products |orderBy:'id' | unique:'category'"
+				ng-click="selectedCategoryHandler(e.category)">{{e.category}}</a>
+
+		</div>
+
+		<!-- <h1>Caterory Details:</h1> -->
+		<div class="col-xs-6">
+			<table border=1 class="table table-striped">
+				<tr class="Success">
+					<th>ID</th>
+					<th>Name</th>
+					<th>Category</th>
+					<th>Price</th>
+					<th>Select</th>
+
+				</tr>
+
+				<!-- FILTERS -->
+				<tr ng-repeat="e in products | filter:filterName">
+
+					<td>{{e.id}}</td>
+					<td>{{e.name }}</td>
+					<td>{{e.category}}</td>
+					<td>{{e.price}}</td>
+					<td><a class="btn btn-block btn-default btn-ln"
+						ng-click="addToCart(e.id)">Add To Cart</a></td>
+
+				</tr>
+				<tr>
+					<td colspan="5"><input type="button" value="checkOut"
+						ng-click="checkOut()" /></td>
+
+				</tr>
+			</table>
+		</div>
+
+		<div ng-show="selectedProd!=null" class="col-xs-6">
+
+			<h1>Seleted Details:</h1>
+			<table border=1 class="table table-striped">
+				<tr class="Success">
+					<th>ID</th>
+					<th>Name</th>
+					<th>Category</th>
+					<th>Price</th>
+					<th>Delete</th>
+
+				</tr>
+
+				<!-- FILTERS -->
+				<tr ng-repeat="e in selectedProd">
+
+					<td>{{e.id}}</td>
+					<td>{{e.name }}</td>
+					<td>{{e.category}}</td>
+					<td>{{e.price}}</td>
+					<td><a class="btn btn-block btn-default btn-ln"
+						ng-click="deleteToCart(e.id)">Delete From Cart</a></td>
+
+				</tr>
+			</table>
+
+		</div>
+	</div>
+
+
+</body>
+</html>

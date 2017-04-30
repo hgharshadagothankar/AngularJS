@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+function Message(text){
+	this.text=text;
+}
+ console.log(angular);
+    var module=angular.module("myModule",[]);
+    module.config(["messageProvider","message1Provider",function(messageProvider,message1Provider){
+    	console.log("inside config");
+    	/* it's hard coded,used for configuration details */
+    	messageProvider.setText("hello world message ");
+    	message1Provider.setText("hello world message 1");
+    	
+    }]);
+    module.provider("message",[function($scope){
+    	var text=null;
+    	this.setText=function(textString){
+    		text=textString;
+    	};
+    	this.$get=[function(){
+    		console.log("inside $get");
+    		return new Message(text);
+    	}];
+    }]);
+    
+    ////////////////////
+      module.provider("message1",[function($scope){
+    	var text=null;
+    	this.setText=function(textString){
+    		text=textString;
+    	};
+    	this.$get=[function(){
+    		console.log("inside message 1 $get");
+    		return new Message(text);
+    	}];
+    }]);
+    
+  /*   module.factory("message",function(){
+    	console.log("inside factory");
+    	return new Message(text);
+    }); */
+    module.controller("displayCtrl",function(message,message1){
+    	console.log("inside displayCtrl");
+    	console.log(message.text);
+    	console.log(message1.text);
+    });
+    module.controller("displayCtrl1",function(message,message1){
+    	console.log("inside displayCtrl1");
+    //	console.log(message.text);
+    });
+
+
+</script>
+</head>
+<body>
+	<div ng-controller="displayCtrl"></div>
+	<div ng-controller="displayCtrl1"></div>
+	
+</body>
+</html>

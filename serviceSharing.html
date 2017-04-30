@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="mainContainer">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+	var module = angular.module("mainContainer", []);
+	module.service("nameService",function(){
+		var obj={
+			name:"rakesh",
+			setName:function(name){
+				console.log("inside setname"+name);
+				this.name=name;
+			},
+			getName:function(){
+				console.log("inside getName service"+this.name);
+				return this.name;
+			}
+		}
+		return obj;
+	});
+	module.controller("registrationController", function($scope,nameService) {
+		
+		
+		var data="this is controller";
+		$scope.names=["ramesh","suesh","dinesh"];
+		
+		$scope.someFunction=function(){
+			console.log("inside get Name"+nameService.getName());
+			nameService.setName($scope.name);
+			console.log("inside get Name registrationController"+nameService.getName());
+		}
+		});
+	
+    module.controller("displayContent", function($scope,nameService) {
+		
+		$scope.nameService=nameService;
+		console.log("scope "+$scope)
+		});
+	
+</script>
+</head>
+<body>
+		<div ng-controller="registrationController">
+				<select ng-options="name for name in names" ng-model="name"></select>
+		
+	<input type="button" ng-click="someFunction()"  value="submit" >
+	
+	</div>
+
+<div ng-controller="displayContent">
+		
+	
+		Inside the contrl {{nameService.getName()}}
+	</div>
+
+
+</body>
+</html>

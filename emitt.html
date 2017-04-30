@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html ng-app="mainContainer">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+	var module = angular.module("mainContainer", []);
+	module.controller("registrationController", function($scope) {
+		
+		
+		$scope.$on("passingEvent", function(event, args) {
+			$scope.name1 = args["name"];
+		})
+		
+	
+		});
+	module.controller("displayContent", function($scope) {
+		var data="this is child controller";
+		$scope.names = ["ramesh","suresh","dinesh"];
+		
+		$scope.someFunction=function(){
+			console.log("in side some function"+$scope.name)
+			var obj={name:$scope.name};
+			$scope.$emit("passingEvent",obj);
+		}
+		
+	});
+</script>
+</head>
+<body>
+	<div ng-controller="registrationController">
+			<div ng-controller="displayContent">
+		
+		<select ng-options="name for name in names" ng-model="name"></select>
+		
+	<input type="button" ng-click="someFunction()"  value="submit" >
+		Inside the contrl {{name}}
+	</div>
+	other ctrl {{name1}}
+	</div>
+
+
+
+</body>
+</html>

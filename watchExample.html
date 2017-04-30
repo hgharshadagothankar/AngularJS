@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html ng-app="mainApp">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script>
+var module=angular.module("mainApp",[]);
+	module.controller("displayCtrl",function($scope){
+		
+		
+		/* $scope.value3= new Number($scope.value1)+new Number($scope.value2); */
+		 $scope.$watch('value2',function(newValue,oldValue){
+			console.log("newValue");
+			console.log(newValue);
+			console.log("oldValue");
+			console.log(oldValue);
+			$scope.value3= new Number($scope.value1)+new Number($scope.value2);
+		}); 
+	});
+</script>
+</head>
+<body>
+	<div ng-controller="displayCtrl">
+	Value 1:<input type="text" ng-model="value1"><br>
+	Value2:<input type="text" ng-model="value2">
+	
+	<br>
+	Value 1: {{value1}} <br>
+	Value 2: {{value2}}<br>
+	Value 3: {{value3||"No Input"}}
+	</div>
+</body>
+</html>

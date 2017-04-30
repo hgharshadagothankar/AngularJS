@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="mainModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript" src="angular-filter.js"></script>
+<script type="text/javascript">
+  var module=angular.module("mainModule",['angular.filter']);
+ 
+  module.controller("displayCtrl",function($scope){
+	  $scope.students=[{name:'ramesh',salary:100000,id:1,age:31,department:'software'},
+	   	              {name:'suresh',salary:20000,id:2,age:21,department:'account'},
+	   				  {name:'dinesh',salary:50000,id:3,age:41,department:'sec'},
+	   				  {name:'mahesh',salary:80000,id:4,age:51,department:'software'}];
+	  
+	  $scope.selectedDepartmentHandler=function(dept){
+		 $scope.SeletedDepartment= dept;
+		 
+		// filterStudent();
+	  }
+	  $scope.filterStudent=function(s){
+		  //return s.department== $scope.SeletedDepartment;
+		  console.log(s);
+		  if(s.department== $scope.SeletedDepartment ||  $scope.SeletedDepartment==null||  $scope.SeletedDepartment==''){
+				 return true;
+			 }
+	  };
+  });
+
+</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div ng-controller="displayCtrl" >
+<div class="col-xs-3">
+<a class="btn btn-block btn-default btn-ln"  ng-click="selectedDepartmentHandler()">Home</a>
+	
+<!-- For unique use angular-filter.js -->
+<a class="btn btn-block btn-default btn-ln" ng-repeat="e in students |orderBy:'department' | unique:'department'" ng-click="selectedDepartmentHandler(e.department)">{{e.department}}</a>
+		
+</div>
+
+
+<h1>Student Details:</h1>
+		<table border=1 class="table table-striped">
+			<tr class="Success">
+				<th>ID</th>
+				<th>Student Id</th>
+				<th>Student Name</th>
+				<th>Salary</th>
+				<th>Age</th>
+				<th>Department</th>
+
+			</tr>
+			
+			<!-- FILTERS -->
+			<tr ng-repeat="e in students | filter:filterStudent">
+				<td><input type="radio" ng-model="$parent.selectedIDByName" name="id" value="{{e.id}}" /></td>
+				<td>{{e.id}}</td>
+				<td>{{e.name }}</td>
+				<td >{{e.salary}}</td>
+				<td>{{e.age}}</td>
+				<td><a class="" ng-click="selectedDepartmentHandlere.department()">{{e.department}}</a></td>
+
+			</tr>
+			<tr>
+				<td colspan="2"><input type="button" value="Delete"
+					ng-click="deleteFunction()" /></td>
+				<td colspan="2"><input type="button" value="Update"
+					ng-click="update()" /></td>
+			</tr>
+		</table>
+      {{SeletedDepartment}}
+
+</div>
+</body>
+</html>

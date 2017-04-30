@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="myModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="angular.min.js"></script>
+<script type="text/javascript">
+function Message(text){
+	this.text=text;
+}
+
+
+ console.log(angular);
+    var module=angular.module("myModule",[]);
+   /*  module.value("URL","http://localhost:8080/MyFirstWebProject/rest/"); */
+    module.constant("URL","http://localhost:8080/MyFirstWebProject/rest/");
+    module.config(["messageProvider","URL",function(messageProvider,URL){
+    	console.log("inside config");
+    	console.log("URL in side config");
+    	console.log(URL);
+    	/* it's hard coded,used for configuration details */
+    	messageProvider.setText("hello world");
+    }]);
+    module.provider("message",[function($scope){
+    	var text=null;
+    	this.setText=function(textString){
+    		text=textString;
+    	};
+    	this.$get=[function(){
+    		console.log("inside $get");
+    		return new Message(text);
+    	}];
+    }]);
+   // module.constant("URL","http://localhost:8080/MyFirstWebProject/rest/student");
+  /*   module.factory("message",function(){
+    	console.log("inside factory");
+    	return new Message(text);
+    }); */
+    module.controller("displayCtrl",function(message,URL){
+    	console.log("inside displayCtrl");
+    	console.log(message.text);
+    	console.log("URL in side displayCtrl");
+    	console.log(URL);
+    	URL="http://localhost:8080/MyFirstWebProject/rest/student";
+    	console.log("After updation URL in side displayCtrl");
+    	console.log(URL);
+    });
+    module.controller("displayCtrl1",function(message){
+    	console.log("inside displayCtrl1");
+    //	console.log(message.text);
+    });
+
+
+</script>
+</head>
+<body>
+	<div ng-controller="displayCtrl"></div>
+	<div ng-controller="displayCtrl1"></div>
+	
+</body>
+</html>

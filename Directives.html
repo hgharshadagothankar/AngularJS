@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html ng-app="simplemodule">
+<head lang="en">
+<meta charset="UTF-8">
+<title></title>
+<script src="angular.min.js"></script>
+<script>
+        var module=angular.module("simplemodule",[]);
+
+        module.controller("saveController" ,function($scope,$http,$rootScope) {
+        	$scope.count=0;
+        	$scope.countClick=0;
+        	$scope.showMe=true;
+             $scope.OnButtonClick=function(){
+                 $scope.showMe=!$scope.showMe;
+            	
+            };
+           
+           
+        });
+         module.controller("displayCtrl" ,function($scope,$http,$rootScope) {
+        	console.log("displayCtrl");
+        	//$scope.items=[2000,9000,5000];
+        	
+        	 $scope.items=[{name:'ramesh',salary:100000},
+        	              {name:'suresh',salary:20000},
+        				  {name:'dinesh',salary:50000},
+        				  {name:'mahesh',salary:80000}];
+        	$scope.value=101;
+        	$scope.doClick=function(item,events){
+        		console.log("items"+item);
+        		console.log(events);
+        	};
+        }); 
+      
+    </script>
+<style>
+.odd{
+background-color: red;
+}
+.even{
+background-color: green;
+}
+
+
+</style>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body >
+<div ng-controller="saveController">
+
+
+<input type="button" ng-click="OnButtonClick()" value="button"/>
+
+<div ng-show="showMe">
+<h1>Menu:</h1>
+<p>Pizza</p>
+<p>Paste</p>
+</div>
+<input type="button" ng-click="countClick= countClick +1" value="click"/>
+{{countClick}}
+
+<h1 ng-mousemove="count= count +1">Mouse over me!!</h1>
+{{count}}
+</div>
+
+<div ng-controller="displayCtrl">
+<ul ng-repeat="i in items" >
+<li ng-class="$odd ?'odd': 'even' ">{{}}</li>
+<li ng-class="$odd ?'odd': 'even' " ng-click="doClick(i,$event)">{{i.name}} {{$index}} {{$first}} {{$last}} {{value}}  </li>
+<li ng-show="(i.salary)>30000">Good salary</li>
+<li ng-show="(i.salary)<30000">Average salary</li>
+
+</ul>
+
+
+
+<table class="table table-striped">
+<tr ng-repeat="i in items"  ng-if="(i.salary)>30000">
+<td  > {{i.name}}</td>
+<td >Show GoOd salary</td>
+<td> GoOd salary</td>
+<!-- <td ng-if="(i.salary)<30000"> Average salary</td> -->
+</tr>
+</table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="mainModule">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script type="text/javascript" src="angular.min.js"></script>
+<script type="text/javascript">
+  var module=angular.module("mainModule",[]);
+ 
+  module.controller("displayCtrl",function($scope){
+	  console.log(angular);
+	  console.log($scope);
+	  $scope.students=[{name:'ramesh',salary:100000,id:1,age:31,department:'software'},
+  	              {name:'suresh',salary:20000,id:2,age:21,department:'software'},
+  				  {name:'dinesh',salary:50000,id:3,age:41,department:'sec'},
+  				  {name:'mahesh',salary:80000,id:4,age:51,department:'software'}];
+	  $scope.deleteFunction=function(){
+		  
+	  };
+	$scope.update=function(){
+		  
+	  }
+	$scope.getDate=function(){
+		return new Date();  
+	  }
+	$scope.departmentFilterFunc=function(students){
+		return students.department=='software';  
+	  }
+  });
+
+</script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+<body>
+<div ng-controller="displayCtrl">
+
+<h1>Student Details:</h1>
+		
+		<table border=1 class="table table-striped">
+			<tr class="Success">
+				<th>ID</th>
+				<th>Student Id</th>
+				<th>Student Name</th>
+				<th>Salary</th>
+				<th>Age</th>
+				<th>Date</th>
+				<th>Department</th>
+
+			</tr>
+			
+			<!-- FILTERS -->
+			<tr ng-repeat="e in students | limitTo:5 | filter:departmentFilterFunc">
+				<td><input type="radio" ng-model="$parent.selectedIDByName" name="id" value="{{e.id}}" /></td>
+				<td>{{e.id  }}</td>
+				<td>{{e.name | uppercase | limitTo:8}}</td>
+				<td >{{e.salary | currency :'Rs.	 '}}</td>
+				<td>{{e.age}}</td>
+				<td>{{getDate() | date:"MMM-dd-yyyy"}}</td>
+				<td>{{e.department}}</td>
+
+			</tr>
+			<tr>
+				<td colspan="2"><input type="button" value="Delete"
+					ng-click="deleteFunction()" /></td>
+				<td colspan="2"><input type="button" value="Update"
+					ng-click="update()" /></td>
+			</tr>
+		</table>
+
+
+</div>
+</body>
+</html>
